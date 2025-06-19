@@ -85,6 +85,8 @@ func NewDatabase(ddl DDL) (*Database, error) {
 		case *ast.CreateView:
 			v := &View{CreateView: stmt}
 			views = append(views, v)
+		case *ast.CreateProtoBundle:
+			// ProtoBundle is not supported in diff, so we ignore it.
 		default:
 			return nil, fmt.Errorf("unexpected ddl statement: %v", stmt.SQL())
 		}
